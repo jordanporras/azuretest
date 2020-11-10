@@ -1,0 +1,69 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_AzureWinTestVM_name": {
+            "defaultValue": "AzureWinTestVM",
+            "type": "String"
+        },
+        "disks_AzureWinTestVM_OsDisk_1_f4eff114ea4e40b69faf3ee9f5d982aa_externalid": {
+            "defaultValue": "/subscriptions/b4f51c33-8c33-48a2-8d97-20a559e45196/resourceGroups/AzureTest/providers/Microsoft.Compute/disks/AzureWinTestVM_OsDisk_1_f4eff114ea4e40b69faf3ee9f5d982aa",
+            "type": "String"
+        },
+        "networkInterfaces_azurewintestvm30_externalid": {
+            "defaultValue": "/subscriptions/b4f51c33-8c33-48a2-8d97-20a559e45196/resourceGroups/AzureTest/providers/Microsoft.Network/networkInterfaces/azurewintestvm30",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2019-07-01",
+            "name": "[parameters('virtualMachines_AzureWinTestVM_name')]",
+            "location": "centralus",
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_B1s"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsDesktop",
+                        "offer": "Windows-10",
+                        "sku": "rs5-pro",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "[concat(parameters('virtualMachines_AzureWinTestVM_name'), '_OsDisk_1_f4eff114ea4e40b69faf3ee9f5d982aa')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "id": "[parameters('disks_AzureWinTestVM_OsDisk_1_f4eff114ea4e40b69faf3ee9f5d982aa_externalid')]"
+                        }
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_AzureWinTestVM_name')]",
+                    "adminUsername": "jordporr",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true,
+                    "requireGuestProvisionSignal": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[parameters('networkInterfaces_azurewintestvm30_externalid')]"
+                        }
+                    ]
+                },
+                "licenseType": "Windows_Client"
+            }
+        }
+    ]
+}

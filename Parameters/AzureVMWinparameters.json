@@ -1,0 +1,15 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_AzureWinTestVM_name": {
+            "value": null
+        },
+        "disks_AzureWinTestVM_OsDisk_1_f4eff114ea4e40b69faf3ee9f5d982aa_externalid": {
+            "value": null
+        },
+        "networkInterfaces_azurewintestvm30_externalid": {
+            "value": null
+        }
+    }
+}
