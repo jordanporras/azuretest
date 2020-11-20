@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "AzureWin2": {
-            "value": "" // TODO: Fill in parameter value
+            "value": ""
         }
     }
 }
