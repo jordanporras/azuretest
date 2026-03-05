@@ -1,0 +1,2 @@
+subscriptions=sub1,sub2,sub3
+subnets=subnet1,subnet2,subnet3
