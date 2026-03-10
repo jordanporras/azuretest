@@ -3,7 +3,6 @@
     "sub1": ["subnet1","subnet2"],
     "sub2": ["subnet3","subnet4"],
     "sub3": ["subnet5","subnet6"],
-    "sub4": ["subnet6","subnet7"],
-    "sub5": ["subnet8","subnet9"]
+    "sub4": ["subnet6","subnet7"]
   }
 }
