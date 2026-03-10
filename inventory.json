@@ -1,0 +1,7 @@
+{
+  "subscriptions": {
+    "sub1": ["subnet1","subnet2"],
+    "sub2": ["subnet3","subnet4"],
+    "sub3": ["subnet5","subnet6"]
+  }
+}
