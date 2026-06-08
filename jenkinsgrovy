@@ -1,0 +1,59 @@
+import jenkins.model.*
+import com.cloudbees.plugins.credentials.*
+import com.cloudbees.plugins.credentials.domains.*
+
+def creds = CredentialsProvider.lookupCredentials(
+    com.cloudbees.plugins.credentials.common.StandardCredentials,
+    Jenkins.instance,
+    null,
+    null
+)
+
+def pat = creds.find { it.id == "github-pat" }?.secret?.toString()
+
+if (!pat) {
+    return ["ERROR: NO PAT FOUND"]
+}
+
+def conn = new URL("https://api.github.com/repos/jordanporras/jenkinstest/contents/inventory.json").openConnection()
+
+conn.setRequestProperty("Authorization", "Bearer " + pat)
+conn.setRequestProperty("Accept", "application/vnd.github.v3+json")
+conn.setRequestProperty("User-Agent", "Jenkins-ActiveChoices")
+
+def response = new groovy.json.JsonSlurper().parseText(conn.inputStream.text)
+def decoded = new String(response.content.decodeBase64(), "UTF-8")
+def json = new groovy.json.JsonSlurper().parseText(decoded)
+
+return json.subscriptions.keySet().toList().sort()
+
+====================================================
+
+import jenkins.model.*
+import com.cloudbees.plugins.credentials.*
+import com.cloudbees.plugins.credentials.domains.*
+
+def creds = CredentialsProvider.lookupCredentials(
+    com.cloudbees.plugins.credentials.common.StandardCredentials,
+    Jenkins.instance,
+    null,
+    null
+)
+
+def pat = creds.find { it.id == "github-pat" }?.secret?.toString()
+
+if (!pat) {
+    return ["ERROR: NO PAT FOUND"]
+}
+
+def conn = new URL("https://api.github.com/repos/jordanporras/jenkinstest/contents/inventory.json").openConnection()
+
+conn.setRequestProperty("Authorization", "Bearer " + pat)
+conn.setRequestProperty("Accept", "application/vnd.github.v3+json")
+conn.setRequestProperty("User-Agent", "Jenkins-ActiveChoices")
+
+def response = new groovy.json.JsonSlurper().parseText(conn.inputStream.text)
+def decoded = new String(response.content.decodeBase64(), "UTF-8")
+def json = new groovy.json.JsonSlurper().parseText(decoded)
+
+return json.subscriptions.keySet().toList().sort()
